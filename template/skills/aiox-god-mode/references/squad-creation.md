@@ -153,7 +153,7 @@ These command files enable `/SQUADS:{squad-name}:{agent-id}` activation.
 
 ### 3. Update Skill Description (if needed)
 
-If the squad should appear in `/aios-god-mode`'s squad list, update the Squads table in SKILL.md.
+If the squad should appear in `/aiox-god-mode`'s squad list, update the Squads table in SKILL.md.
 
 ## Agent Collaboration Patterns
 

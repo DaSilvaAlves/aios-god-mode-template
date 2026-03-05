@@ -1,139 +1,42 @@
-<h1 align="center">
-  ⚡ create-aios-god-mode
-</h1>
+# aios-god-mode-template
 
-<p align="center">
-  <strong>Monte um sistema completo de desenvolvimento orquestrado por IA em segundos.</strong><br>
-  <sub>10 agentes de IA. 22 skills. 3 servidores MCP. Um único comando.</sub>
-</p>
+God Mode template for **Synkra AIOS** — complete agent personas, skills, rules and framework configuration.
 
-<p align="center">
-  <a href="https://www.npmjs.com/package/create-aios-god-mode"><img src="https://img.shields.io/npm/v/create-aios-god-mode?style=flat-square&color=cb3837&label=npm" alt="npm version"></a>
-  <a href="https://www.npmjs.com/package/create-aios-god-mode"><img src="https://img.shields.io/npm/dm/create-aios-god-mode?style=flat-square&color=blue" alt="npm downloads"></a>
-  <a href="https://github.com/gutomec/create-aios-god-mode/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/create-aios-god-mode?style=flat-square&color=green" alt="license"></a>
-  <img src="https://img.shields.io/node/v/create-aios-god-mode?style=flat-square&color=339933" alt="node version">
-</p>
+## v4.0.0
 
-<p align="center">
-  <a href="#-início-rápido">Início Rápido</a> ·
-  <a href="#-veja-em-ação">Exemplos</a> ·
-  <a href="#-o-que-você-recebe">O Que Você Recebe</a> ·
-  <a href="#-funcionalidades">Funcionalidades</a> ·
-  <a href="#-comandos">Comandos</a> ·
-  <a href="#-agentes-de-ia">Agentes</a> ·
-  <a href="#-skills-do-ecossistema">Skills</a>
-</p>
+- `aiox-god-mode` is now the **primary skill** with full God Mode functionality
+- `aios-god-mode` is a **legacy redirect** that activates `aiox-god-mode` automatically
+- Support for **6 AI Tools**: Claude Code, Codex, Gemini, Cursor, GitHub Copilot, Antigravity
+- Codex support with `openai.yaml` and `AGENTS.md` skills list
 
-<br>
+## Usage
 
-<p align="center">
-  <sub>
-    Baseado no <a href="https://github.com/SynkraAI/aios-core"><strong>Synkra AIOS</strong></a> por <a href="https://github.com/Pedrovaleriolopez"><strong>Pedro Valério</strong></a> · Construído sobre o <a href="https://docs.anthropic.com/en/docs/claude-code"><strong>Claude Code</strong></a> da <a href="https://www.anthropic.com">Anthropic</a>
-  </sub>
-</p>
-
----
-
-### 🏆 Créditos e Agradecimentos
-
-> **Este projeto é construído sobre o [Synkra AIOS](https://github.com/SynkraAI/aios-core)**, o framework open-source de orquestração de agentes de IA para desenvolvimento full-stack criado por **[Pedro Valério](https://github.com/Pedrovaleriolopez)** e mantido pela organização **[SynkraAI](https://github.com/SynkraAI)** (1.850+ stars no GitHub). Sem o trabalho do Pedro e da comunidade Synkra, este projeto não existiria.
-
-Este projeto existe graças ao trabalho incrível de diversas comunidades e criadores open-source:
-
-| Projeto | Autor / Organização | Contribuição |
-|---------|---------------------|--------------|
-| [**Synkra AIOS**](https://github.com/SynkraAI/aios-core) | [**Pedro Valério**](https://github.com/Pedrovaleriolopez) / [SynkraAI](https://github.com/SynkraAI) | Framework core — toda a arquitetura de agentes, constitution, workflows, tasks, templates e o sistema de squads que este CLI instala e configura |
-| [squads.sh](https://squads.sh) | [gutomec](https://github.com/gutomec) | Plataforma de gerenciamento de squads para projetos AIOS |
-| [Claude Code](https://docs.anthropic.com/en/docs/claude-code) | [Anthropic](https://www.anthropic.com) | Motor de IA que torna tudo possível — agentes, skills e MCP rodam sobre o Claude Code |
-| [Skills CLI](https://github.com/anthropics/skills) | [Anthropic](https://github.com/anthropics) | Skills oficiais: `frontend-design`, `pdf`, `docx`, `xlsx`, `pptx` |
-| [Vercel Agent Skills](https://github.com/vercel-labs/agent-skills) | [Vercel](https://github.com/vercel-labs) | Skills: `web-design-guidelines`, `vercel-react-best-practices`, `vercel-composition-patterns` |
-| [wshobson/agents](https://github.com/wshobson/agents) | [wshobson](https://github.com/wshobson) | Skills: `stripe-integration`, `api-design-principles`, `architecture-patterns`, `nodejs-backend-patterns`, `error-handling-patterns`, `github-actions-templates`, `deployment-pipeline-design`, `prompt-engineering-patterns` |
-| [Marketing Skills](https://github.com/coreyhaines31/marketingskills) | [coreyhaines31](https://github.com/coreyhaines31) | Skills: `seo-audit`, `programmatic-seo`, `schema-markup` |
-| [Inference Skills](https://github.com/inference-sh/skills) | [inference-sh](https://github.com/inference-sh) | Skills: `ai-video-generation`, `ai-image-generation` |
-| [UI/UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | [nextlevelbuilder](https://github.com/nextlevelbuilder) | Skill: `ui-ux-pro-max` |
-| [Clean Code Skill](https://github.com/ratacat/claude-skills) | [ratacat](https://github.com/ratacat) | Skill: `clean-code` |
-| [nano-banana-pro](https://www.npmjs.com/package/@rafarafarafa/nano-banana-pro-mcp) | [rafarafarafa](https://github.com/rafarafarafa) | Servidor MCP para geração de imagens com Gemini |
-| [Context7](https://github.com/upstash/context7-mcp) | [Upstash](https://github.com/upstash) | Servidor MCP para documentação de bibliotecas ao vivo |
-| [21st.dev Magic](https://github.com/21st-dev/magic) | [21st.dev](https://github.com/21st-dev) | Servidor MCP para busca e geração de componentes UI |
-| [Get Shit Done](https://www.npmjs.com/package/get-shit-done-cc) | [get-shit-done](https://github.com/get-shit-done) | Framework GSD para gestão de projetos com Claude Code |
-| [cc-deploy](https://github.com/saadnvd1/cc-deploy) | [saadnvd1](https://github.com/saadnvd1) | Deploy em VPS via Claude Code |
-
-> [!NOTE]
-> `create-aios-god-mode` é um **instalador e orquestrador** — ele baixa, configura e integra os projetos listados acima. Todo o crédito pelo framework Synkra AIOS pertence a [Pedro Valério](https://github.com/Pedrovaleriolopez) e à organização [SynkraAI](https://github.com/SynkraAI). O crédito pelas skills, MCPs e ferramentas pertence aos respectivos autores. Se você é autor de algum projeto listado e deseja ajustes na atribuição, [abra uma issue](https://github.com/gutomec/create-aios-god-mode/issues).
-
----
+This template is used by [`create-aios-god-mode`](https://github.com/gutomec/create-aios-god-mode) and [`create-aiox-god-mode`](https://github.com/gutomec/create-aiox-god-mode) to install the God Mode skill into projects.
 
 ```bash
-npx create-aios-god-mode meu-projeto
+npx create-aios-god-mode my-project
+# or
+npx create-aiox-god-mode my-project
 ```
 
-> [!TIP]
-> Use `--yes` para pular todos os prompts e aceitar os padrões: `npx create-aios-god-mode meu-projeto --yes`
+## Contents
 
----
+- `template/skills/aiox-god-mode/` — Main God Mode skill (AIOX branding)
+- `template/skills/aios-god-mode/` — Legacy redirect to `aiox-god-mode`
+- `template/rules/` — Framework rules and agent authority
+- `template/config/` — Framework configuration (settings.json, deny rules)
 
-## 🎯 O Que Você Recebe
+## Backward Compatibility
 
-<table>
-<tr>
-<td align="center" width="33%">
-<h3>🤖 10 Agentes de IA</h3>
-<sub>Dev, QA, Architect, PM, PO, SM, Analyst, Data Engineer, UX Designer, DevOps — cada um com persona única e comandos exclusivos</sub>
-</td>
-<td align="center" width="33%">
-<h3>🧩 22 Skills</h3>
-<sub>Design frontend, SEO, clean code, Stripe, CI/CD, geração de imagens/vídeos com IA, processamento de documentos e mais</sub>
-</td>
-<td align="center" width="33%">
-<h3>🔌 3 Servidores MCP</h3>
-<sub>nano-banana-pro (imagens IA), Context7 (docs ao vivo), 21st.dev (componentes UI) — pré-configurados e prontos</sub>
-</td>
-</tr>
-<tr>
-<td align="center" width="33%">
-<h3>👥 4 Squads</h3>
-<sub>AFS (dev de framework), NSC (criador de squads), BrandCraft (design de marca), Ultimate LP (landing pages)</sub>
-</td>
-<td align="center" width="33%">
-<h3>📖 Dev Orientado a Stories</h3>
-<sub>Ciclo completo: criar → validar → implementar → QA gate. Toda feature começa com uma story</sub>
-</td>
-<td align="center" width="33%">
-<h3>🛡️ Proteção do Framework</h3>
-<sub>Modelo de 4 camadas (L1–L4) com deny rules. Arquivos core do framework são imutáveis por design</sub>
-</td>
-</tr>
-</table>
+The `/aios-god-mode` slash command still works — it redirects to `/aiox-god-mode` seamlessly. No action needed from existing users.
 
----
+## Credits
 
-## 🚀 Início Rápido
+Based on [Synkra AIOS](https://github.com/SynkraAI/aios-core) by [Pedro Valério](https://github.com/Pedrovaleriolopez) / [SynkraAI](https://github.com/SynkraAI).
 
-**1.** Crie seu projeto
+## License
 
-```bash
-npx create-aios-god-mode meu-projeto
-```
-
-**2.** Entre no diretório
-
-```bash
-cd meu-projeto
-```
-
-**3.** Ative o God Mode
-
-```bash
-claude
-# depois digite: /aios-god-mode
-```
-
-> [!IMPORTANT]
-> O [Claude Code](https://docs.anthropic.com/en/docs/claude-code) precisa estar instalado para usar o sistema de agentes AIOS. Instale com `npm install -g @anthropic-ai/claude-code`.
-
----
-
-## 🎬 Veja em Ação
+MIT
 
 > **Um prompt. Sistema completo. Zero trabalho manual.**
 >
