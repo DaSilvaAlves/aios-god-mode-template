@@ -221,7 +221,7 @@ After creating ANY component, verify:
 | 7 | Squad manifest updated (squad.yaml) | Squad components |
 | 8 | Constitutional compliance verified | All |
 | 9 | No L1/L2 files modified (unless framework contributor) | All |
-| 10 | UTF-8 encoding with PT-BR accents preserved | All |
+| 10 | UTF-8 encoding with accents preserved | All |
 
 ## Anti-Patterns (NEVER)
 

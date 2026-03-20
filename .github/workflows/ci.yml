@@ -1,0 +1,146 @@
+name: CI — Template Validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-template:
+    name: Validate Template Structure
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate template.json
+        run: |
+          echo "Validating template.json..."
+          node -e "
+            const t = require('./template.json');
+            const required = ['name', 'version', 'description', 'aiosMinVersion', 'files', 'checksums'];
+            const missing = required.filter(k => !t[k]);
+            if (missing.length) { console.error('Missing fields:', missing); process.exit(1); }
+            if (Object.keys(t.checksums).length === 0) { console.error('Checksums are empty'); process.exit(1); }
+            console.log('template.json OK —', Object.keys(t.checksums).length, 'checksums');
+          "
+
+      - name: Validate template files exist
+        run: |
+          echo "Checking all files referenced in template.json checksums..."
+          node -e "
+            const fs = require('fs');
+            const t = require('./template.json');
+            let failed = false;
+            for (const f of Object.keys(t.checksums)) {
+              if (!fs.existsSync(f)) { console.error('MISSING:', f); failed = true; }
+              else { console.log('OK:', f); }
+            }
+            if (failed) process.exit(1);
+            console.log('All', Object.keys(t.checksums).length, 'files present');
+          "
+
+      - name: Verify checksums
+        run: |
+          echo "Verifying SHA256 checksums..."
+          node -e "
+            const fs = require('fs');
+            const crypto = require('crypto');
+            const t = require('./template.json');
+            let failed = false;
+            for (const [file, expected] of Object.entries(t.checksums)) {
+              const content = fs.readFileSync(file);
+              const actual = crypto.createHash('sha256').update(content).digest('hex');
+              if (actual !== expected) {
+                console.error('MISMATCH:', file);
+                console.error('  expected:', expected);
+                console.error('  actual:  ', actual);
+                failed = true;
+              } else {
+                console.log('OK:', file);
+              }
+            }
+            if (failed) process.exit(1);
+            console.log('All checksums verified');
+          "
+
+      - name: Validate YAML files
+        run: |
+          echo "Checking YAML syntax..."
+          for f in $(find . -name "*.yaml" -o -name "*.yml" | grep -v node_modules | grep -v .git/); do
+            echo "Validating: $f"
+            node -e "
+              const fs = require('fs');
+              const content = fs.readFileSync('$f', 'utf8');
+              if (content.trim().length === 0) { console.error('Empty file:', '$f'); process.exit(1); }
+              console.log('OK:', '$f');
+            "
+          done
+
+      - name: Validate SKILL.md frontmatter
+        run: |
+          echo "Checking skill frontmatter..."
+          node -e "
+            const fs = require('fs');
+            const glob = require('path');
+            const skills = [
+              'template/skills/aiox-god-mode/SKILL.md',
+              'template/skills/aios-god-mode/SKILL.md',
+              'template/skills/find-skills/SKILL.md'
+            ];
+            let failed = false;
+            for (const s of skills) {
+              const content = fs.readFileSync(s, 'utf8');
+              if (!content.startsWith('---')) {
+                console.error('Missing frontmatter:', s);
+                failed = true;
+              } else {
+                const fm = content.split('---')[1];
+                if (!fm.includes('name:') || !fm.includes('description:')) {
+                  console.error('Incomplete frontmatter:', s);
+                  failed = true;
+                } else {
+                  console.log('OK:', s);
+                }
+              }
+            }
+            if (failed) process.exit(1);
+          "
+
+      - name: Validate settings.json
+        run: |
+          echo "Checking settings.json schema..."
+          node -e "
+            const s = require('./template/config/settings.json');
+            if (!s.permissions) { console.error('Missing permissions'); process.exit(1); }
+            if (!s.permissions.allow) { console.error('Missing allow list'); process.exit(1); }
+            console.log('settings.json OK —', s.permissions.allow.length, 'allow rules');
+          "
+
+  lint-markdown:
+    name: Lint Markdown
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for broken internal links
+        run: |
+          echo "Checking internal references..."
+          node -e "
+            const fs = require('fs');
+            const path = require('path');
+            const readme = fs.readFileSync('README.md', 'utf8');
+            const links = readme.match(/\[.*?\]\(((?!http)[^)]+)\)/g) || [];
+            let broken = false;
+            for (const link of links) {
+              const target = link.match(/\(([^)]+)\)/)[1];
+              if (!fs.existsSync(target)) {
+                console.error('Broken link:', target, 'in README.md');
+                broken = true;
+              }
+            }
+            if (broken) process.exit(1);
+            console.log('All', links.length, 'internal links valid');
+          "

@@ -6,7 +6,9 @@
   "files": {
     "skills": "template/skills/",
     "rules": "template/rules/",
-    "config": "template/config/"
+    "config": "template/config/",
+    "codex": "template/openai.yaml",
+    "agents": "template/AGENTS.md"
   },
   "checksums": {
     "template/AGENTS.md": "8cd13428531321746ff919ed179a708660925b3f4f2dd62676171c8e8b6b8bf9",
@@ -14,7 +16,7 @@
     "template/config/settings.json": "41eb9ed11a346571f07cb27f9612fd355c815482dd67a01a89770372f182a5b4",
     "template/rules/tool-examples.md": "0e04bf5b9d1c216f4ea86086c34acb0c9e48da40967bcddca82e822f274a4ee3",
     "template/skills/aios-god-mode/SKILL.md": "28abf008b2de461663fe9765ff5e894b6b32b1e421da753995cd717f52ebc1bc",
-    "template/skills/aiox-god-mode/SKILL.md": "9e2cde7df9255f914ebf3792efbca14590cc2b4eaf94a76385235a7d0c32ba66",
+    "template/skills/aiox-god-mode/SKILL.md": "ac7cf5c9a4acb1d71885bb512696ce00f1c2351bf0ec37295f0b960a8f7eac06",
     "template/skills/aiox-god-mode/references/agent-creation.md": "b79a2c190a87a4b7fba8818f4d30ec6ceb4da949d7650f6715d9ca8ea0e1375c",
     "template/skills/aiox-god-mode/references/agent-matrix.md": "a041c7c454c4eda531c247a0a23c7684bc71442e444da40ea314745cec956528",
     "template/skills/aiox-god-mode/references/component-templates.md": "ab1cf0abb5d502e305dd54b081e3c10aa2ce47acbcefa4c47d20d4a189740697",

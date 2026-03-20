@@ -1,0 +1,55 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract version from tag
+        id: version
+        run: echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Validate version matches template.json
+        run: |
+          node -e "
+            const t = require('./template.json');
+            const tag = '${{ steps.version.outputs.version }}';
+            if (t.version !== tag) {
+              console.error('Version mismatch: template.json has', t.version, 'but tag is', tag);
+              process.exit(1);
+            }
+            console.log('Version OK:', tag);
+          "
+
+      - name: Generate release notes
+        id: notes
+        run: |
+          echo "## What's Changed" > release-notes.md
+          echo "" >> release-notes.md
+          git log $(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || git rev-list --max-parents=0 HEAD)..HEAD --pretty=format:"- %s" >> release-notes.md
+          echo "" >> release-notes.md
+          echo "## Template Contents" >> release-notes.md
+          echo "" >> release-notes.md
+          echo "| Component | Count |" >> release-notes.md
+          echo "|-----------|-------|" >> release-notes.md
+          echo "| Skills | $(find template/skills -name 'SKILL.md' | wc -l) |" >> release-notes.md
+          echo "| Rules | $(find template/rules -name '*.md' | wc -l) |" >> release-notes.md
+          echo "| References | $(find template/skills -path '*/references/*.md' | wc -l) |" >> release-notes.md
+          echo "| Config files | $(find template/config -type f | wc -l) |" >> release-notes.md
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          body_path: release-notes.md
+          generate_release_notes: true
