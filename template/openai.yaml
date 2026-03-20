@@ -1,0 +1,4 @@
+model: o4-mini
+approval_mode: suggest
+full_auto_error_handling: ask-user
+notify: true

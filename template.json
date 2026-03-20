@@ -8,5 +8,21 @@
     "rules": "template/rules/",
     "config": "template/config/"
   },
-  "checksums": {}
+  "checksums": {
+    "template/AGENTS.md": "8cd13428531321746ff919ed179a708660925b3f4f2dd62676171c8e8b6b8bf9",
+    "template/openai.yaml": "9291138da4433debc773ede21723cf643e1a5062902be4d4b1f430df67e59ebe",
+    "template/config/settings.json": "41eb9ed11a346571f07cb27f9612fd355c815482dd67a01a89770372f182a5b4",
+    "template/rules/tool-examples.md": "0e04bf5b9d1c216f4ea86086c34acb0c9e48da40967bcddca82e822f274a4ee3",
+    "template/skills/aios-god-mode/SKILL.md": "28abf008b2de461663fe9765ff5e894b6b32b1e421da753995cd717f52ebc1bc",
+    "template/skills/aiox-god-mode/SKILL.md": "9e2cde7df9255f914ebf3792efbca14590cc2b4eaf94a76385235a7d0c32ba66",
+    "template/skills/aiox-god-mode/references/agent-creation.md": "b79a2c190a87a4b7fba8818f4d30ec6ceb4da949d7650f6715d9ca8ea0e1375c",
+    "template/skills/aiox-god-mode/references/agent-matrix.md": "a041c7c454c4eda531c247a0a23c7684bc71442e444da40ea314745cec956528",
+    "template/skills/aiox-god-mode/references/component-templates.md": "ab1cf0abb5d502e305dd54b081e3c10aa2ce47acbcefa4c47d20d4a189740697",
+    "template/skills/aiox-god-mode/references/framework-map.md": "da0f9476c886fcaf273dfd406f164ce168cd807aadf47edfae2f045c07fd510d",
+    "template/skills/aiox-god-mode/references/squad-creation.md": "7f86cbffa9d3a8bc3a4d5b478bd86d83e22aa635411703cdc91d5e7e4106af73",
+    "template/skills/aiox-god-mode/references/task-creation.md": "0482d456a47251ba2cf20c6aae7457735c8ec0c1bda073f87f8ace4b380f5783",
+    "template/skills/aiox-god-mode/references/workflow-creation.md": "8383588646ead631ed7fc93937e790b0306f96c286b6911a404298b23d19b16f",
+    "template/skills/aiox-god-mode/references/workflow-playbooks.md": "2ee28c7a2c98d2a2fb6f9e8719ee3c28cf68d4ca5d0fadc79d6df17f9d753a9f",
+    "template/skills/find-skills/SKILL.md": "e2f2f737e3795be94573711242341315cd82735b088248ab880fdafbb2010b9a"
+  }
 }
